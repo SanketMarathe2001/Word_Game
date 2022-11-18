@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Word Game</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> 
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+</head>
+
+<body>
+  {% for message in get_flashed_messages()%}
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    {{message}}<span type="button" class="close" data-bs-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span></span>
+  </div>
+  {% endfor %}
+  <div class="row">
+  <div class="col-md-4 common">
+    <div class="row set">
+    <div class="card" style="width: auto; text-align: left;">
+      <div class="card-body">
+        <h5 class="card-title">Rules</h5>
+        <ul>
+          <li>Word should be greater than 2 letters.</li>
+          <li>Word must contain vowel.</li>
+          <li>Plurals are not allowed.</li>
+          <li>No Foreign language words are allowed.</li>
+          <li>No proper names are allowed.</li>
+          <li>Same alphabet can't be used twice.</li> 
+          <li>Find the longest word(s) using given letters</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-md-4 middle">
+  <h1 id="title">Word Game</h1>
+  <div class="set">
+  <div>
+    <button class="word">Z</button>
+    <button class="word">G</button>
+    <button class="word">N</button>
+    <button class="word">T</button>
+  </div>
+  <div>
+    <button class="word">H</button>
+    <button class="word">B</button>
+    <button class="word">I</button>
+    <button class="word">O</button>
+  </div>
+  <div>
+    <button class="word">M</button>
+    <button class="word">P</button>
+    <button class="word">D</button>
+    <button class="word">A</button>
+  </div>
+  <div>
+    <button class="word">U</button>
+    <button class="word">W</button>
+    <button class="word">Y</button>
+    <button class="word">E</button>
+  </div>
+  <form action = "http://localhost:5000/submit" method = "POST">
+    <div class="form-outline md-4 set col-sm-10 mx-5">
+        <input type="text" id="word_value" name="word_value" placeholder="Enter a Word" class="form-control" required/>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+  </form>
+  <form action = "http://localhost:5000/endgame" method = "POST">
+    <button type="submit" {{visible}} class="btn btn-danger btn-block mb-4">End the Game</button>
+  </form>
+  </div>
+</div>
+  
+  <div class="col-md-4 common">
+  <div class="row set">
+    <div class="card" style="width: 18rem; text-align: left;max-height:250px; overflow-y:scroll;">
+      <div class="card-body">
+        <h5 class="card-title">Words : {{ w_size }}</h5>
+        {% for word in words %}
+        <ul>
+          <li>{{word}}</li>
+        </ul>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+
+</html>
